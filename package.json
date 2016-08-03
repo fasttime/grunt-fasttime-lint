@@ -1,0 +1,37 @@
+{
+  "name": "grunt-fasttime-lint",
+  "version": "0.0.3",
+  "description": "ESLint and JSCS validation",
+  "keywords": [
+    "eslint",
+    "gruntplugin",
+    "jscs",
+    "lint",
+    "validate"
+  ],
+  "homepage": "https://github.com/fasttime/grunt-fasttime-lint",
+  "bugs": {
+    "url": "https://github.com/fasttime/grunt-fasttime-lint/issues"
+  },
+  "license": "ISC",
+  "author": "Francesco Trotta <ft@fasttime.org> (https://github.com/fasttime)",
+  "files": [
+    "tasks"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fasttime/grunt-fasttime-lint.git"
+  },
+  "scripts": {
+    "build": "npm install && grunt"
+  },
+  "dependencies": {
+    "grunt-eslint": "~19.0.0",
+    "grunt-jscs": "~3.0.1",
+    "semver": "~5.3.0"
+  },
+  "devDependencies": {
+    "grunt": "~1.0.1",
+    "grunt-cli": "~1.2.0"
+  }
+}
