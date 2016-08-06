@@ -271,7 +271,12 @@ module.exports =
                 var eslintConfig =
                 {
                     options:
-                    { envs: opts.envs, parserOptions: opts.parserOptions, rules: opts.eslintRules }
+                    {
+                        envs:           opts.envs,
+                        globals:        opts.globals,
+                        parserOptions:  opts.parserOptions,
+                        rules:          opts.eslintRules
+                    }
                 };
                 eslintConfig[target] = files;
                 grunt.config.set('eslint', eslintConfig);
