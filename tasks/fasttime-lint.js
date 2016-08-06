@@ -162,6 +162,7 @@ var ESLINT_RULES =
     'max-params':                       'off',
     'max-statements':                   'off',
     'max-statements-per-line':          'error',
+    'multiline-ternary':                'off',
     'new-cap':                          ['error', { capIsNew: false }],
     'new-parens':                       'error',
     'newline-after-var':                'off',
@@ -181,6 +182,7 @@ var ESLINT_RULES =
     'no-plusplus':                      'off',
     'no-restricted-syntax':             'error',
     'no-spaced-func':                   'off',
+    'no-tabs':                          'error',
     'no-ternary':                       'off',
     'no-trailing-spaces':               ['error', { skipBlankLines: true }],
     'no-underscore-dangle':             'off',
@@ -213,7 +215,6 @@ var ESLINT_RULES =
 var JSCS_RULES =
 {
     disallowSpacesInCallExpression: true,
-    disallowTabs: true,
     requireAlignedMultilineParams: true,
     requireKeywordsOnNewLine:
     [
