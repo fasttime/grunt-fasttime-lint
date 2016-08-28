@@ -23,14 +23,15 @@ var ESLINT_RULES =
     'no-inner-declarations':            'error',
     'no-invalid-regexp':                'error',
     'no-irregular-whitespace':          'error',
-    'no-negated-in-lhs':                'error',
     'no-obj-calls':                     'error',
     'no-prototype-builtins':            'off',
     'no-regex-spaces':                  'off',
     'no-sparse-arrays':                 'off',
+    'no-template-curly-in-string':      'off',
     'no-unexpected-multiline':          'off',
     'no-unreachable':                   'error',
     'no-unsafe-finally':                'error',
+    'no-unsafe-negation':               'error',
     'use-isnan':                        'error',
     'valid-jsdoc':                      'error',
     'valid-typeof':                     'error',
@@ -39,6 +40,7 @@ var ESLINT_RULES =
     'accessor-pairs':                   'error',
     'array-callback-return':            'off',
     'block-scoped-var':                 'off',
+    'class-methods-use-this':           'off',
     'complexity':                       'off',
     'consistent-return':                'off',
     'curly':                            ['error', 'multi-or-nest'],
@@ -61,18 +63,18 @@ var ESLINT_RULES =
     'no-extra-label':                   'error',
     'no-fallthrough':                   'error',
     'no-floating-decimal':              'error',
+    'no-global-assign':                 'error',
     'no-implicit-coercion':             'off',
     'no-implicit-globals':              'off',
     'no-implied-eval':                  'error',
     'no-invalid-this':                  'off',
     'no-iterator':                      'error',
-    'no-labels':                        'error',
+    'no-labels':                        ['error', { allowLoop: true, allowSwitch: true }],
     'no-lone-blocks':                   'error',
     'no-loop-func':                     'error',
     'no-magic-numbers':                 'off',
     'no-multi-spaces':                  'off',
     'no-multi-str':                     'error',
-    'no-native-reassign':               'error',
     'no-new':                           'off',
     'no-new-func':                      'off',
     'no-new-wrappers':                  'error',
@@ -142,6 +144,7 @@ var ESLINT_RULES =
     'computed-property-spacing':        'error',
     'consistent-this':                  'off',
     'eol-last':                         'error',
+    'func-call-spacing':                'off',
     'func-names':                       ['error', 'never'],
     'func-style':                       'off',
     'id-blacklist':                     'off',
@@ -181,7 +184,6 @@ var ESLINT_RULES =
     'no-new-object':                    'error',
     'no-plusplus':                      'off',
     'no-restricted-syntax':             'error',
-    'no-spaced-func':                   'off',
     'no-tabs':                          'error',
     'no-ternary':                       'off',
     'no-trailing-spaces':               ['error', { skipBlankLines: true }],
@@ -201,6 +203,7 @@ var ESLINT_RULES =
     'require-jsdoc':                    'off',
     'semi':                             'error',
     'semi-spacing':                     'error',
+    'sort-keys':                        'off',
     'sort-vars':                        'off',
     'space-before-blocks':              'error',
     'space-before-function-paren':      ['error', { anonymous: 'always', named: 'never' }],
@@ -242,6 +245,15 @@ var semver = require('semver');
 module.exports =
     function (grunt)
     {
+        function loadTask(taskName)
+        {
+            var taskDir = 'node_modules/grunt-fasttime-lint/node_modules/' + taskName;
+            if (grunt.file.isDir(taskDir))
+                grunt.loadTasks(taskDir + '/tasks');
+            else
+                grunt.loadNpmTasks(taskName);
+        }
+        
         grunt.registerMultiTask(
             'fasttime_lint',
             'Validate files with ESLint and JSCS',
@@ -256,17 +268,8 @@ module.exports =
                     this.options(
                         { eslintRules: ESLINT_RULES, jscsRules: JSCS_RULES, outputFile: false }
                     );
-                var taskDir = 'node_modules/grunt-fasttime-lint/node_modules/';
-                if (grunt.file.isDir(taskDir))
-                {
-                    grunt.loadTasks(taskDir + 'grunt-eslint/tasks');
-                    grunt.loadTasks(taskDir + 'grunt-jscs/tasks');
-                }
-                else
-                {
-                    grunt.loadNpmTasks('grunt-eslint');
-                    grunt.loadNpmTasks('grunt-jscs');
-                }
+                loadTask('grunt-eslint');
+                loadTask('grunt-jscs');
                 var target = this.target;
                 var files = this.filesSrc;
                 var eslintConfig =
