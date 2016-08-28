@@ -1,6 +1,6 @@
 {
   "name": "grunt-fasttime-lint",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "ESLint and JSCS validation",
   "keywords": [
     "eslint",
